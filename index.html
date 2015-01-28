@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.spinner.js"></script>
+</head>
+<body style="padding: 25px; background-color: #fafafa">
+
+<div style="background-color: white">
+    <div class="b-spinner">
+        <input class="b-spinner__input" type="text" value="10" name="value"/>
+        <a class="b-spinner__control m-up">&#9650;</a>
+        <a class="b-spinner__control m-down">&#9660;</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('b-spinner').spinner();
+    });
+</script>
+</body>
+</html>

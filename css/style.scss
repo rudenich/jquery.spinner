@@ -1,0 +1,38 @@
+$border-width:1px;
+$border-input: $border-width solid #ddd;
+.b-spinner{
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  &__input{
+    border:$border-input;
+    font-size: inherit;
+  }
+
+  &__control{
+    font-size: 0.4em;
+    position: absolute;
+    right:$border-width;
+    padding: 0.13em 0.8em;
+    border:1px solid #eee;
+    cursor: pointer;
+    color:#555;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &.m-up{
+      top:$border-width;
+      bottom:50%;
+    }
+    &.m-down{
+      top:50%;
+
+      bottom:$border-width;
+    }
+  }
+}

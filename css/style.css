@@ -1,0 +1,29 @@
+.b-spinner {
+  font-size: 1rem;
+  position: relative;
+  display: inline-block; }
+  .b-spinner__input {
+    border: 1px solid #ddd;
+    font-size: inherit; }
+  .b-spinner__control {
+    font-size: 0.4em;
+    position: absolute;
+    right: 1px;
+    padding: 0.13em 0.8em;
+    border: 1px solid #eee;
+    cursor: pointer;
+    color: #555;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .b-spinner__control.m-up {
+      top: 1px;
+      bottom: 50%; }
+    .b-spinner__control.m-down {
+      top: 50%;
+      bottom: 1px; }
+
+/*# sourceMappingURL=style.css.map */
