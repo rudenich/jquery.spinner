@@ -10,7 +10,7 @@ $border-input: $border-width solid #ddd;
   }
 
   &__control{
-    font-size: 0.4em;
+    font-size: 0.5em;
     position: absolute;
     right:$border-width;
     padding: 0.13em 0.8em;
@@ -28,11 +28,28 @@ $border-input: $border-width solid #ddd;
     &.m-up{
       top:$border-width;
       bottom:50%;
+      &:after{
+        position: absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height: 100%;
+        content: "\25B2";
+        text-align: center;
+      }
     }
     &.m-down{
       top:50%;
-
       bottom:$border-width;
+      &:after{
+        position: absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height: 100%;
+        content: "\25BC";
+        text-align: center;
+      }
     }
   }
 }

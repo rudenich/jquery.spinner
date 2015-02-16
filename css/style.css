@@ -6,7 +6,7 @@
     border: 1px solid #ddd;
     font-size: inherit; }
   .b-spinner__control {
-    font-size: 0.4em;
+    font-size: 0.5em;
     position: absolute;
     right: 1px;
     padding: 0.13em 0.8em;
@@ -22,8 +22,24 @@
     .b-spinner__control.m-up {
       top: 1px;
       bottom: 50%; }
+      .b-spinner__control.m-up:after {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        content: "\25B2";
+        text-align: center; }
     .b-spinner__control.m-down {
       top: 50%;
       bottom: 1px; }
+      .b-spinner__control.m-down:after {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        content: "\25BC";
+        text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

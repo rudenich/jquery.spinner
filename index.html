@@ -10,16 +10,32 @@
 <body style="padding: 25px; background-color: #fafafa">
 
 <div style="background-color: white">
-    <div class="b-spinner">
-        <input class="b-spinner__input" type="text" value="10" name="value"/>
-        <a class="b-spinner__control m-up">&#9650;</a>
-        <a class="b-spinner__control m-down">&#9660;</a>
-    </div>
+    <input type="text" class="jq-spinner" value="10" readonly data-maxvalue="20"/>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('b-spinner').spinner();
+
+        $('.jq-spinner')
+                .spinner()
+                .on('change',function(e,options){
+            var
+                    _this = $(this),
+                    up = _this.parent().find('.m-up'),
+                    down = _this.parent().find('.m-down')
+                ;
+            if(_this.val()==options.maxValue){
+                up.addClass('disabled');
+            }else if(_this.val()==options.minValue){
+                down.addClass('disabled');
+            }else{
+                up.removeClass('disabled');
+                down.removeClass('disabled');
+            }
+        });
+
+
+
     });
 </script>
 </body>

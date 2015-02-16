@@ -1,52 +1,106 @@
 (function($){
+    var fnull = function(){};
+
     var defaults = {
         minValue:1,
         maxValue:100,
         step:1,
-        containerSelectro:'.b-spinner',
-        decSelector:'.b-spinner__control.m-down',
-        incSelector:'.b-spinner__control.m-up',
-        inputSelector:'.b-spinner__input'
-
+        cssClass:'b-spinner'
     };
-    var options = {};
 
-    $.fn.spinner = function(opts){
-        opts = opts||{};
-        options = $.extend(defaults,opts);
-        console.log($(options.incSelector));
-        $(options.incSelector).on('click',function(e){
-            e.preventDefault();
-            var
-                _this       = $(e.currentTarget),
-                container   = _this.parents(options.containerSelectro),
-                input = container.find(options.inputSelector),
-                value = parseInt(input.val())
-                ;
 
-            value = value+options.step;
-            if(value<=options.maxValue){
-                input.val(value);
-                input.trigger('change');
+    $.extend(defaults,{
+        htmlWrapper:'<div class="{cssClass}"></div>',
+        htmlControls:'<a class="{cssClass}__control m-up"></a><a class="{cssClass}__control m-down"></a>'
+    });
+
+
+    function getDataValue(dom,attributes){
+        var result = {};
+        for(var i =0; i<attributes.length;i++){
+            if(dom.data(attributes[i].toLowerCase())!=undefined){
+                result[attributes[i]] = dom.data(attributes[i].toLowerCase());
             }
-
-        })
-
-        $(options.decSelector).on('click',function(e){
-            e.preventDefault();
-            var
-                _this       = $(e.currentTarget),
-                container   = _this.parents(options.containerSelectro),
-                input = container.find(options.inputSelector),
-                value = parseInt(input.val())
-                ;
-
-            value = value-options.step;
-            if(value>=options.minValue){
-                input.val(value);
-                input.trigger('change');
-            }
-
-        })
+        }
+        return result;
     }
+
+
+    var Spinner = function(options){
+        this.init(options);
+    }
+
+
+    var proto = {
+
+        init:function(options){
+            options = options||{};
+            options = $.extend(defaults,options,getDataValue(options['input'],['maxValue','minValue']));
+
+            console.log(options);
+            var input = options['input'];
+            delete options['input'];
+
+            var cssClass = defaults.cssClass;
+            input
+                .prop('readonly',true)
+                .addClass(cssClass)
+                .wrap(options.htmlWrapper.replace(/\{cssClass\}/,cssClass))
+                .parent().append(options.htmlControls.replace(/\{cssClass\}/g,cssClass));
+
+            var wrapper = input.parent();
+
+            wrapper.find('.m-up').on('click', $.proxy(function(e){
+                e.preventDefault();
+                this.up();
+            },this));
+            wrapper.find('.m-down').on('click', $.proxy(function(e){
+                e.preventDefault();
+                this.down();
+            },this));
+            this.input = input;
+            this.options = options =  $.extend(defaults,options);
+            console.log(this);
+        },
+        up:function(){
+            var
+                value = parseInt(this.input.val()),
+                newValue = value+1
+            ;
+
+            if(newValue>this.options.maxValue){
+                return;
+            }
+            this.input.val(newValue).trigger('change',[this.options]);
+        },
+        down:function(){
+            var
+                value = parseInt(this.input.val()),
+                newValue = value-1
+                ;
+
+            if(newValue<this.options.minValue){
+                return;
+            }
+            this.input.val(newValue).trigger('change',[this.options]);
+        }
+    };
+
+    Spinner.prototype = proto;
+
+
+
+    $.fn.spinner = function(options){
+        options = options ||{};
+
+        this.each(function(){
+            options['input']  = $(this);
+            new Spinner(options);
+        });
+        return this;
+    }
+
+    $.spinner = {
+        defaults:defaults
+    };
 })(jQuery)
