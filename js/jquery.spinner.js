@@ -35,9 +35,7 @@
 
         init:function(options){
             options = options||{};
-            options = $.extend(defaults,options,getDataValue(options['input'],['maxValue','minValue']));
-
-            console.log(options);
+            options = $.extend({},defaults,options,getDataValue(options['input'],['maxValue','minValue']));
             var input = options['input'];
             delete options['input'];
 
@@ -59,8 +57,8 @@
                 this.down();
             },this));
             this.input = input;
-            this.options = options =  $.extend(defaults,options);
-            console.log(this);
+            this.options  =  options;//$.extend(defaults,options);
+
         },
         up:function(){
             var
@@ -95,7 +93,8 @@
 
         this.each(function(){
             options['input']  = $(this);
-            new Spinner(options);
+            var spinner = new Spinner(options);
+            $(this).data('spinner',spinner);
         });
         return this;
     }
