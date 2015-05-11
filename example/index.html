@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css"/>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery.spinner.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../jquery.spinner.js"></script>
+    <link rel="stylesheet" href="../jquery.spinner.css"/>
 </head>
 <body style="padding: 25px; background-color: #fafafa">
 
 <div style="background-color: white">
-    <input type="text" class="jq-spinner" value="10" readonly data-maxvalue="20"/>
+    <input type="text" class="jq-spinner" value="10" readonly data-maxvalue="20"  data-minvalue="0"/>
+    <input type="text" class="jq-spinner" value="3" readonly data-maxvalue="5"  data-minvalue="1"/>
 </div>
 
 <script type="text/javascript">
@@ -19,6 +21,7 @@
         $('.jq-spinner')
                 .spinner()
                 .on('change',function(e,options){
+                    console.log(options);
             var
                     _this = $(this),
                     up = _this.parent().find('.m-up'),
